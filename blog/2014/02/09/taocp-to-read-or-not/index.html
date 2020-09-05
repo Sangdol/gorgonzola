@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <title>이상현 IN 베를린 :: The Art of Computer Programming - 읽을 것인가?</title>
+    <meta name="description" content="베를린 사는 개발자 이야기">
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index,follow">
+    <meta property="og:image" content="https://iamsang.com/ogimage.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sakura.css">
+    <link href="/css/custom.css" rel="stylesheet">
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+            })(window,document.documentElement,'async-hide','dataLayer',4000,
+            {'GTM-PGRQWF8':true});
+        </script>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-23501808-2', 'auto');
+          ga('require', 'GTM-PGRQWF8');
+          ga('send', 'pageview');
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <section class="header">
+        <div class="container">
+            <div class="content">
+                <a href="/">
+                    <div class="name">
+                        이상현
+                        <span class="colored" style="font-weight:100">in</span>
+                        <span style="font-weight:300">베를린</span>
+                    </div>
+                </a>
+                <nav>
+                    <a href="/about"><span>About</span></a>
+                </nav>
+            </div>
+        </div>
+    </section>
+<div class="container article">
+    <div class="page-heading">The Art of Computer Programming - 읽을 것인가?</div>
+    <blockquote><p> There's a (possibly apocryphal) story about Steve Jobs meeting Knuth. The first thing Jobs said to him was "It's a pleasure to meet you Dr. Knuth. I've read all your works!". Knuth's response was "You're full of shit". </p></blockquote><p>개발자라면 누구나 한 번쯤 <a href='http://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read'>꼭 읽어야할 개발 서적 목록</a>과 같은 것에 압도당한 적이 있을 것이다.</p><p>그중 나를 가장 난감하게 했던 도서 중 하나가 바로 TAOCP(The Art of Computer Programming)였다. 단 한 권의 분량도 만만치 않은데 지금까지 나와 있는 것만으로 4권. 감히 엄두도 내기 힘든 분량의 책이었다.</p><p><img src="http://ecx.images-amazon.com/images/I/41gCSRxxVeL.jpg" alt="The Art of Computer Programming (출처: Amazon)" /></p><p>워낙 유명한 책이다 보니 읽어보고 싶은 욕심은 나지만 분량에 압도되어 엄두는 나지 않고, 그래서 좀 더 검색을 해보았다.</p><p>다행히 이런 게으른 고민을 한 사람이 나뿐만은 아니었다. <a href='http://programmers.stackexchange.com/questions/17214/the-art-of-computer-programming-to-read-or-not-to-read'>TAOCP 읽을 것인가 말 것인가?</a>라는 질문이 Stack Exchange에 올라있었다.</p><p>질답의 내용이 인상적이어서 간단히 옮겨본다.<h2></h2></p><h3>질문</h3><p>수많은 개발 서적들이 나와 있고, 많은 사람의 꼭 읽어야 하는 개발서적 리스트 최상단에 올라와 있는 책이 Code Complete로 보이는데, Donald Knuth의 The Art of Computer Programming은 어떤가요? 저는 일과 가족 사이에서 바쁜 사람으로, 많은 시간을 가지고 있지 않기 때문에 시간을 어떻게 사용할지 신중하게 생각합니다.</p><p>혹시 TAOCP를 읽어보신 분 계신가요? 다른 책을 읽거나 pet project 또는 오픈소스에 참여하는 것보다 TAOCP를 읽는 것이 저의 개발자로서의 전문성에 더 도움이 될까요?</p><p>하략</p><h3>답변</h3><p>TAOCP는 우리가 매일 사용하는 자료구조나 알고리즘이 어떻게 동작하는지 이해할 수 있게 해주는 매우 귀중한(utterly invaluable) 자료이지만, TAOCP를 처음부터 끝까지 읽기 위해서는 어마어마한 시간투자가 필요합니다.</p><p>다른 한 가족의 일원으로서 말씀드리는데, 아이들과 시간을 보내십시오.</p>
+</div>
+    <section class="signup">
+        <div class="container2">
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                <form action="https://hjparenting.us17.list-manage.com/subscribe/post?u=8abdd78f471e341ecbf00840c&amp;id=423c9920d1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll">
+
+                        <div class="mc-field-group">
+                            <input placeholder="이메일 주소" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"><input type="submit" value="블로그 구독" name="subscribe" id="mc-embedded-subscribe" class="subscribe button">
+                        </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8abdd78f471e341ecbf00840c_423c9920d1" tabindex="-1" value=""></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="icons">
+        <div class="container">
+            <div class="content">
+                <a href="//github.com/sangdol" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
+                <a href="//stackoverflow.com/users/524588/sanghyun-lee" target="_blank" rel="noopener"><img class="icon" src="/img/stackoverflow.svg" alt="stackoverflow" /></a>
+                <a href="//twitter.com/sangdolha" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
+                <a href="//linkedin.com/in/sanghyun-lee-b1129151" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
+                <a href="mailto:hammerha+iamsang-kr@gmail.com"><img class="icon" src="/img/email.svg" alt="email" /></a>
+                <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

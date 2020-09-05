@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <title>이상현 IN 베를린 :: 카페 네트워크 트러블슈팅</title>
+    <meta name="description" content="집 근처 카페에서 와이파이 연결 후 인터넷 접속을 하려는데 안 된다. 책이나 읽어야겠다고 생각하고 잠시 책을 보다가 지루해져서 왜 안 되는지 알아보기로 했다.">
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index,follow">
+    <meta property="og:image" content="https://iamsang.com/ogimage.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      document.querySelectorAll('pre code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    });
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Ubuntu+Mono:400,400i,700,700i|Raleway:500">
+    <link href="/css/normalize.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/sakura.css">
+    <link href="/css/custom.css" rel="stylesheet">
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+            h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+            (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+            })(window,document.documentElement,'async-hide','dataLayer',4000,
+            {'GTM-PGRQWF8':true});
+        </script>
+    <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+          ga('create', 'UA-23501808-2', 'auto');
+          ga('require', 'GTM-PGRQWF8');
+          ga('send', 'pageview');
+        </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <section class="header">
+        <div class="container">
+            <div class="content">
+                <a href="/">
+                    <div class="name">
+                        이상현
+                        <span class="colored" style="font-weight:100">in</span>
+                        <span style="font-weight:300">베를린</span>
+                    </div>
+                </a>
+                <nav>
+                    <a href="/about"><span>About</span></a>
+                </nav>
+            </div>
+        </div>
+    </section>
+<div class="container article">
+    <div class="page-heading">카페 네트워크 트러블슈팅</div>
+    <p>집 근처 카페에서 와이파이 연결 후 인터넷 접속을 하려는데 안 된다. 책이나 읽어야겠다고 생각하고 잠시 책을 보다가 지루해져서 왜 안 되는지 알아보기로 했다.</p><p>아이피는 잘 할당되었나?</p><pre><code class="shell">en0: flags=8863&lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500
+  inet6 fe80::c88:d8dc:9818:3458%en0 prefixlen 64 secured scopeid 0x4
+  inet 192.168.179.43 netmask 0xffffff00 broadcast 192.168.179.255
+  nd6 options=201&lt;PERFORMNUD,DAD&gt;
+  media: autoselect
+  status: active
+</code></pre><p>아이피가 잘 할당된 것을 보니 공유기가 동작은 하는 듯하다.</p><p>어디에서 막히는지를 볼까.</p><pre><code class="shell">$ traceroute google.com
+traceroute: unknown host google.com
+</code></pre><p>호스트를 못찾는다. DNS 검색 시도.</p><pre><code class="shell">$ dig google.com
+
+; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; google.com
+;; global options: +cmd
+;; connection timed out; no servers could be reached
+</code></pre><p>DNS 서버로 접근 자체를 못하고 있다.</p><p><a href='https://ko.wikipedia.org/wiki/%EA%B5%AC%EA%B8%80_%ED%8D%BC%EB%B8%94%EB%A6%AD_DNS'>구글 퍼블릭 DNS 서버</a>로 연결이 잘 되는지 확인.</p><pre><code class="shell">$ ping 8.8.8.8
+PING 8.8.8.8 &#40;8.8.8.8&#41;: 56 data bytes
+64 bytes from 8.8.8.8: icmp&#95;seq=0 ttl=46 time=36.443 ms
+64 bytes from 8.8.8.8: icmp&#95;seq=1 ttl=46 time=34.619 ms
+64 bytes from 8.8.8.8: icmp&#95;seq=2 ttl=46 time=34.496 ms
+</code></pre><p>DNS 서버로 연결은 되고 있다. 외부 인터넷으로 연결은 되고있다는 뜻이다. 문제는 DNS 검색. 네트워크 DNS 설정에 가보니 이전에 설정해놓은 구글 DNS 서버 IP들이 있다.</p><p><img src="/img/network-dns-settings.png" alt="네트워크 DNS 세팅" /></p><p>해당 목록을 제거하고 설정을 적용한 후 다시 인터넷에 접속하니 잘 된다.</p><h3>왜 DNS 서버를 수동으로 설정했을땐 안 되었을까?</h3><p>일부 네트워크에서는 특정 도메인으로 접근을 막는 등의 통제를 위해 또는 <a href='https://ko.wikipedia.org/wiki/DNS_%EC%8A%A4%ED%91%B8%ED%95%91'>DNS 스푸핑</a>과 같은 공격으로부터 보호하기 위해 외부 DNS 서버로의 접근을 막는 경우가 있다.</p><h3>그렇다면 왜 특정(구글) DNS 서버를 사용하나?</h3><p><a href='https://blog.dnsimple.com/2015/03/why-and-how-to-use-googles-public-dns/'>구글 DNS 서버는 빠르고 안전하며 쿼리에 대한 정확한 결과를 내어준다</a>.</p><p>2014년 터키 시위 당시 정부에서 시민들의 트위터로의 접근을 막기 위해 ISP의 DNS를 조작하였는데, 시민들이 구글 DNS를 이용하여 접속을 하기도 하였다. 정부는 결국 구글 DNS로의 접근도 막았다.</p><p><img src="/img/dns-giraffiti.jpg" title="구글 DNS 아이피를 적은 그라피티"></p><p>DNS 서버를 수동으로 설정해 놓는 것은 좋은 생각일 수 있다. 하지만 일부 네트워크에서는 문제가 될 수 있으니 주의해야한다.</p>
+</div>
+    <section class="signup">
+        <div class="container2">
+            <!-- Begin MailChimp Signup Form -->
+            <div id="mc_embed_signup">
+                <form action="https://hjparenting.us17.list-manage.com/subscribe/post?u=8abdd78f471e341ecbf00840c&amp;id=423c9920d1" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll">
+
+                        <div class="mc-field-group">
+                            <input placeholder="이메일 주소" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL"><input type="submit" value="블로그 구독" name="subscribe" id="mc-embedded-subscribe" class="subscribe button">
+                        </div>
+                        <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display:none"></div>
+                            <div class="response" id="mce-success-response" style="display:none"></div>
+                        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_8abdd78f471e341ecbf00840c_423c9920d1" tabindex="-1" value=""></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="icons">
+        <div class="container">
+            <div class="content">
+                <a href="//github.com/sangdol" target="_blank" rel="noopener"><img class="icon" src="/img/github.svg" alt="github" /></a>
+                <a href="//stackoverflow.com/users/524588/sanghyun-lee" target="_blank" rel="noopener"><img class="icon" src="/img/stackoverflow.svg" alt="stackoverflow" /></a>
+                <a href="//twitter.com/sangdolha" target="_blank" rel="noopener"><img class="icon" src="/img/twitter.svg" alt="twitter" /></a>
+                <a href="//linkedin.com/in/sanghyun-lee-b1129151" target="_blank" rel="noopener"><img class="icon" src="/img/linkedin.svg" alt="linkedin" /></a>
+                <a href="mailto:hammerha+iamsang-kr@gmail.com"><img class="icon" src="/img/email.svg" alt="email" /></a>
+                <a href="/index.xml"><img class="icon" src="/img/rss.svg" alt="rss" /></a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
