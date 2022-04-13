@@ -144,6 +144,20 @@ a:hover {
   border-bottom-color: var(--font-color);
 }
 
+/*overriding sakura.css <ul> margin-bottom*/
+.article img {
+  margin-bottom: 0;
+}
+
+/*overriding sakura.css <ul> margin-bottom*/
+.article :is(ul, ol) {
+  margin-bottom: 0;
+}
+
+.article > :is(ul, ol) {
+  margin-bottom: 2.5rem;
+}
+
 section.header .name {
   font-size: 28px;
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
@@ -326,12 +340,13 @@ blockquote {
 }
 
 h3 {
-  font-size: 1.3em;
-  font-weight: var(--font-heading-weight);
+  font-size: 1.4em;
+  font-weight: var(--font-bold-weight);
 }
 
 h4 {
   font-size: 1.1em;
+  color: var(--font-light-color);
   font-weight: var(--font-bold-weight);
 }
 
