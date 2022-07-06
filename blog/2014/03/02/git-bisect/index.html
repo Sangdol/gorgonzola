@@ -97,9 +97,9 @@
             <a href="/"><span>홈</span></a>
             <a href="/blog"><span>글</span></a>
             <a href="/about"><span>소개</span></a>
-            <a href="/popular"><span>인기글</span></a>
             <a href="/subscribe"><span>구독</span></a>
             <a href="https://twitter.com/sangdolha"><span>트위터</span></a>
+            <a href="https://careerly.co.kr/profiles/414463"><span>커리어리</span></a>
         </nav>
     </section>
     <hr class="top-line">
@@ -116,6 +116,7 @@
             </div>
         </div>
     </section>
+
 <div class="container article">
     <div class="page-heading">Git bisect를 이용하여 버그발생시점 찾아내기</div>
     <p>버그가 발생했는데 도저히 무엇이 원인인지, 언제 어떤 부분에서 이루어진 수정으로 인해 문제가 발생했는지 감을 잡을 수 없을 때가 있다.</p><p>이런 상황에서 활용할 수 있는 것이 <a href="http://git-scm.com/book/en/Git-Tools-Debugging-with-Git#Binary-Search">git bisect</a>이다. <code>git bisect</code>는 이진검색을 이용해 버그 발생 시점을 찾아내는 방법이다. 원인을  예상할 수 없는 문제가 발생했을 때, 의심되는 파일의 코드를 반씩 잘라내가며 수동 이진검색 디버깅을 했던 적이 있는데, <code>git bisect</code>를 잘 활용하면 이런 수고를 덜 수 있다.</p><p>사용법은 간단하다. 아래와 같은 커밋이 있다고 하자. 문제 발생 시점은 커밋 4이고, 현재 위치는 커밋 6이다.</p><pre><code>.. - 0 - 1 - 2 - 3 - 4&#42; - 5 - &#40;6&#41;
